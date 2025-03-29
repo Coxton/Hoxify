@@ -1,0 +1,25 @@
+body{
+  margin: 0;
+  
+}
+
+
+
+/*-----------------------------------------------------------------------------*/
+/*                                   Header                                    */
+/*-----------------------------------------------------------------------------*/
+
+.header-top{
+  padding: 10px;
+}
+
+.header-top__list{
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+
