@@ -1,16 +1,116 @@
-body{
-  margin: 0;
-  
+/*-----------------------------------------------------------------------------*/
+/*                                   Base                                       */
+/*-----------------------------------------------------------------------------*/
+
+@font-face {
+  font-family: "Barlow";
+  src: url('Barlow-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
 }
 
 
+@font-face {
+  font-family: "Barlow";
+  src: url('Barlow-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+body{
+  margin: 0;
+  background: rgb(0,128,128);
+  background: linear-gradient(308deg, rgba(0,128,128,1) 9%, rgba(121,9,68,1) 48%, rgba(46,46,46,1) 85%); 
+  color: #FFFAFA;
+  font-family: 'Barlow', sans-serif;
+  overflow: hidden;
+}
+
+.main-section
+{
+  display: flex;
+  gap: 10px;
+  padding: 50px;
+  flex-direction: row;
+  overflow: hidden;
+}
+
 
 /*-----------------------------------------------------------------------------*/
-/*                                   Header                                    */
+/*                                   Music Player                              */
 /*-----------------------------------------------------------------------------*/
+
+.music-player__card{
+  width: 100%;
+  max-width: 350px;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  
+}
+.music-player__card__inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-thumbnail{
+  border-radius: 10px;
+}
+
+.thumbnail{
+  max-width: 300px;
+  max-height: 315px;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.player-title {
+  display: flex;
+  flex-direction: column;
+  margin: 30px 10px 10px;
+  gap: 15px;
+  width: 100%;
+  max-width: 300px;
+  font-size: 14px;
+}
+
+.player-title__name{
+  font-weight: 700;
+}
+
+.progress-bar{
+  color: #b22849;
+  padding: 15px;
+}
+.player-controls{
+  padding: 15px;
+}
+
+/*-----------------------------------------------------------------------------*/
+/*                                   Content Section                           */
+/*-----------------------------------------------------------------------------*/
+
+.main-section__content{
+  flex: 1;
+}
 
 .header-top{
   padding: 10px;
+  display: flex;
+}
+
+.header-title{
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 600;
+}
+
+.header-icons{
+  margin-left: auto;
+  color: #FFFAFA;
 }
 
 .header-top__list{
@@ -20,6 +120,6 @@ body{
   gap: 10px;
   margin: 0;
   padding: 0;
+  display: none;
 }
-
 

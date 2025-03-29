@@ -2,40 +2,80 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Hello World!</title>
+    <title>Hoxify - Music whenever you want</title>
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
+    <div class="main-section">
 
-    <nav class="header-top">
-      <ul class="header-top__list">
-        <li class="header-top__list-item">
-          <span class="list-item--text">
-            File
-          </span>
-        </li>
-        <li class="header-top__list-item">
-          <span class="list-item--text">
-            Twitch
-          </span>
-        </li>
-        <li class="header-top__list-item">
-          <span class="list-item--text">
-            Song Requests
-          </span>
-        </li>
-        <li class="header-top__list-item">
-          <span class="list-item--text">
-            History
-          </span>
-        </li>
-        <li class="header-top__list-item">
-          <span class="list-item--text">
-            View
-          </span>
-        </li>
-      </ul>
-    </nav>
+      <div class="main-section__music-player">
+        <div class="music-player__card">
+          <div class="music-player__card__inner">
+            <div class="player-thumbnail">
+              <img class="thumbnail" src="assets/img/thumbnail_placeholder.jpg">
+            </div>
+            <div class="player-title">
+              <span class="player-title__name">
+                This is the title of the Song
+              </span>
+              <span class="player-title__artist">
+                Artist Name
+              </span>
+            </div>
+            <div class="player-controls">
+                Here is gonna be the Player Controls
+            </div>
+            <div class="progress-bar">
+                This is where the Progress Bar is gonna end up
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="main-section__content">
+
+         <nav class="header-top">
+          <div class="header-title">
+            Hoxify
+          </div>
+          <div class="header-icons">
+            <span class="burger-menu">
+              <img src="assets/icons/burger-menu.svg" width="24"  height="24"> 
+            </span>
+          </div>
+          <ul class="header-top__list">
+            <li class="header-top__list-item">
+              <span class="list-item--text">
+                File
+              </span>
+            </li>
+            <li class="header-top__list-item">
+              <span class="list-item--text">
+                Twitch
+              </span>
+            </li>
+            <li class="header-top__list-item">
+              <span class="list-item--text">
+                Song Requests
+              </span>
+            </li>
+            <li class="header-top__list-item">
+              <span class="list-item--text">
+                History
+              </span>
+            </li>
+            <li class="header-top__list-item">
+              <span class="list-item--text">
+                View
+              </span>
+            </li>
+          </ul>
+
+        </nav> 
+
+      </div>
+    </div>
+
+    
 
   </body>
 </html>
