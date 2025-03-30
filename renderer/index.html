@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>Hoxify - Music whenever you want</title>
     <link rel="stylesheet" href="index.css" />
+
   </head>
   <body>
     <div class="main-section">
@@ -33,49 +34,87 @@
       </div>
       <div class="main-section__content">
 
-         <nav class="header-top">
+        <nav class="header-top">
           <div class="header-title">
             Hoxify
           </div>
           <div class="header-icons">
-            <span class="burger-menu">
-              <img src="assets/icons/burger-menu.svg" width="24"  height="24"> 
+            <span class="user-regular">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="800px" height="800px" viewBox="0 0 256 256" id="Flat" stroke="#ffffff">
+
+                <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                
+                <g id="SVGRepo_iconCarrier"> <path d="M228.47461,213.98975a116.52651,116.52651,0,0,0-74.73389-55.06446,68,68,0,1,0-51.48144,0,116.5263,116.5263,0,0,0-74.73242,55.062,4.00024,4.00024,0,1,0,6.9248,4.00684,108.03687,108.03687,0,0,1,187.09814.00147,4,4,0,0,0,6.92481-4.00586ZM68,96a60,60,0,1,1,60,60A60.06812,60.06812,0,0,1,68,96Z"/> </g>
+                
+                </svg>
+            </span>
+            <span class="burger-menu" id="burgerMenu">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 50 50" width="50px" height="50px"><path d="M 0 9 L 0 11 L 50 11 L 50 9 Z M 0 24 L 0 26 L 50 26 L 50 24 Z M 0 39 L 0 41 L 50 41 L 50 39 Z"/></svg> 
             </span>
           </div>
-          <ul class="header-top__list">
-            <li class="header-top__list-item">
-              <span class="list-item--text">
-                File
-              </span>
-            </li>
-            <li class="header-top__list-item">
-              <span class="list-item--text">
-                Twitch
-              </span>
-            </li>
-            <li class="header-top__list-item">
-              <span class="list-item--text">
-                Song Requests
-              </span>
-            </li>
-            <li class="header-top__list-item">
-              <span class="list-item--text">
-                History
-              </span>
-            </li>
-            <li class="header-top__list-item">
-              <span class="list-item--text">
-                View
-              </span>
-            </li>
-          </ul>
+          <div class="offbrand-sidenav" id="sidenav">
+            <span class="close-sidenav" id="closebtn">
+              <svg class="sidenav-cross" xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" fill="currentColor">
 
+                <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                
+                <g id="SVGRepo_iconCarrier"> <path d="M17.2929 5.29289C17.6834 4.90237 18.3166 4.90237 18.7071 5.29289C19.0976 5.68342 19.0976 6.31658 18.7071 6.70711L13.4142 12L18.7071 17.2929C19.0976 17.6834 19.0976 18.3166 18.7071 18.7071C18.3166 19.0976 17.6834 19.0976 17.2929 18.7071L12 13.4142L6.70711 18.7071C6.31658 19.0976 5.68342 19.0976 5.29289 18.7071C4.90237 18.3166 4.90237 17.6834 5.29289 17.2929L10.5858 12L5.29289 6.70711C4.90237 6.31658 4.90237 5.68342 5.29289 5.29289C5.68342 4.90237 6.31658 4.90237 6.70711 5.29289L12 10.5858L17.2929 5.29289Z" fill="#FFFAFA"/> </g>
+                
+                </svg>            
+              </span>
+            <ul class="header-top__list">
+              <li class="header-top__list-item">
+                <span class="list-item--text">
+                  File
+                </span>
+                <ul class="sub-list">
+                  <li class="sub-list-item">
+                    Settings
+                  </li>
+                  <li class="sub-list-item">
+                    Widget
+                  </li>
+                  <li class="sub-list-item">
+                    Exit
+                  </li>
+                </ul>
+              </li>
+              <li class="header-top__list-item">
+                <span class="list-item--text">
+                  Song Requests
+                </span>
+                <ul class="sub-list">
+                  <li class="sub-list-item">
+                    Blocklist
+                  </li>
+                  <li class="sub-list-item">
+                    Clear Queue
+                  </li>
+                </ul>
+              </li>
+              <li class="header-top__list-item">
+                <span class="list-item--text">
+                  History
+                </span>
+              </li>
+              <li class="header-top__list-item">
+                <span class="list-item--text">
+                  View
+                </span>
+              </li>
+            </ul>
+          </div>
+        
         </nav> 
 
       </div>
     </div>
 
     
-
+    <script src="renderer.js"></script>
   </body>
 </html>
