@@ -51,45 +51,115 @@
                 </svg>
             </span>
             <span class="burger-menu" id="burgerMenu">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 50 50" width="50px" height="50px"><path d="M 0 9 L 0 11 L 50 11 L 50 9 Z M 0 24 L 0 26 L 50 26 L 50 24 Z M 0 39 L 0 41 L 50 41 L 50 39 Z"/></svg> 
-            </span>
+                <svg fill="currentColor" class="burger-svg" id="burger" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="50" height="50" class="burger-svg" id="burger">
+                  <rect class="line top"    x="0" y="9"  width="50" height="2" />
+                  <rect class="line middle" x="0" y="24" width="50" height="2" />
+                  <rect class="line bottom" x="0" y="39" width="50" height="2" />
+                </svg>
+              </span>
           </div>
         </nav> 
 
         <div class="content-wrapper" >
             <div class="tabs-section">
-              <div class="tab-item selected">
+              <div class="tab-item" data-tab="queue">
                 <span class="tab-item__text">
-                  Song Queue
+                  Queue
                 </span>
-                
               </div>
-              <div class="tab-item">
+              <div class="tab-item selected" data-tab="settings">
+                <svg class="close-tab" data-target="closeSettings" xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 24 24" fill="currentColor">
+
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                  
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                  
+                  <g id="SVGRepo_iconCarrier"> <path d="M17.2929 5.29289C17.6834 4.90237 18.3166 4.90237 18.7071 5.29289C19.0976 5.68342 19.0976 6.31658 18.7071 6.70711L13.4142 12L18.7071 17.2929C19.0976 17.6834 19.0976 18.3166 18.7071 18.7071C18.3166 19.0976 17.6834 19.0976 17.2929 18.7071L12 13.4142L6.70711 18.7071C6.31658 19.0976 5.68342 19.0976 5.29289 18.7071C4.90237 18.3166 4.90237 17.6834 5.29289 17.2929L10.5858 12L5.29289 6.70711C4.90237 6.31658 4.90237 5.68342 5.29289 5.29289C5.68342 4.90237 6.31658 4.90237 6.70711 5.29289L12 10.5858L17.2929 5.29289Z" fill="#FFFAFA"/> </g>
+                  
+                  </svg>
                 <span class="tab-item__text">
                   Settings
                 </span>
               </div>
+              <div class="tab-item" data-tab="account">
+                <svg class="close-tab" data-target="closeAccount" xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 24 24" fill="currentColor">
+
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                  
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                  
+                  <g id="SVGRepo_iconCarrier"> <path d="M17.2929 5.29289C17.6834 4.90237 18.3166 4.90237 18.7071 5.29289C19.0976 5.68342 19.0976 6.31658 18.7071 6.70711L13.4142 12L18.7071 17.2929C19.0976 17.6834 19.0976 18.3166 18.7071 18.7071C18.3166 19.0976 17.6834 19.0976 17.2929 18.7071L12 13.4142L6.70711 18.7071C6.31658 19.0976 5.68342 19.0976 5.29289 18.7071C4.90237 18.3166 4.90237 17.6834 5.29289 17.2929L10.5858 12L5.29289 6.70711C4.90237 6.31658 4.90237 5.68342 5.29289 5.29289C5.68342 4.90237 6.31658 4.90237 6.70711 5.29289L12 10.5858L17.2929 5.29289Z" fill="#FFFAFA"/> </g>
+                  
+                  </svg>
+                <span class="tab-item__text">
+                  Account
+                </span>
+              </div>
+              <div class="tab-item" data-tab="widget">
+                <svg class="close-tab" data-target="closeSettings" xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 24 24" fill="currentColor">
+
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                  
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                  
+                  <g id="SVGRepo_iconCarrier"> <path d="M17.2929 5.29289C17.6834 4.90237 18.3166 4.90237 18.7071 5.29289C19.0976 5.68342 19.0976 6.31658 18.7071 6.70711L13.4142 12L18.7071 17.2929C19.0976 17.6834 19.0976 18.3166 18.7071 18.7071C18.3166 19.0976 17.6834 19.0976 17.2929 18.7071L12 13.4142L6.70711 18.7071C6.31658 19.0976 5.68342 19.0976 5.29289 18.7071C4.90237 18.3166 4.90237 17.6834 5.29289 17.2929L10.5858 12L5.29289 6.70711C4.90237 6.31658 4.90237 5.68342 5.29289 5.29289C5.68342 4.90237 6.31658 4.90237 6.70711 5.29289L12 10.5858L17.2929 5.29289Z" fill="#FFFAFA"/> </g>
+                  
+                  </svg>
+                <span class="tab-item__text">
+                  Widget
+                </span>
+              </div>
             </div>
             <div class="content-section">
-              <div class="content-section__inner">
-
+              <div class="content-list" data-content="queue">
+                <ul class="settings-list">
+                  <li class="settings-list-item">
+                    <span class="settings-list-item__text">
+                      System
+                    </span>
+                  </li>
+                  <li class="settings-list-item">
+                    <span class="settings-list-item__text">
+                      Output
+                    </span>
+                  </li>
+                  <li class="settings-list-item">
+                    <span class="settings-list-item__text">
+                      Twitch
+                    </span>
+                    <ul class="list-item__sub-menu">
+                      <li class="sub-menu__list-item">
+                        <span class="sub-list__text">
+                            Rewards
+                        </span>
+                      </li>
+                      <li class="sub-menu__list-item">
+                        <span class="sub-list__text">
+                            SongRequest
+                        </span>
+                      </li>
+                      <li class="sub-menu__list-item">
+                        <span class="sub-list__text">
+                            Responses
+                        </span>
+                      </li>
+                      <li class="sub-menu__list-item">
+                        <span class="sub-list__text">
+                            Commands
+                        </span>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div class="content-detail">
+                
               </div>
             </div>
         </div>
 
       </div>
       <div class="offbrand-sidenav" id="sidenav">
-        <span class="close-sidenav" id="closebtn">
-          <svg class="sidenav-cross" xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" fill="currentColor">
-
-            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-            
-            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-            
-            <g id="SVGRepo_iconCarrier"> <path d="M17.2929 5.29289C17.6834 4.90237 18.3166 4.90237 18.7071 5.29289C19.0976 5.68342 19.0976 6.31658 18.7071 6.70711L13.4142 12L18.7071 17.2929C19.0976 17.6834 19.0976 18.3166 18.7071 18.7071C18.3166 19.0976 17.6834 19.0976 17.2929 18.7071L12 13.4142L6.70711 18.7071C6.31658 19.0976 5.68342 19.0976 5.29289 18.7071C4.90237 18.3166 4.90237 17.6834 5.29289 17.2929L10.5858 12L5.29289 6.70711C4.90237 6.31658 4.90237 5.68342 5.29289 5.29289C5.68342 4.90237 6.31658 4.90237 6.70711 5.29289L12 10.5858L17.2929 5.29289Z" fill="#FFFAFA"/> </g>
-            
-            </svg>            
-          </span>
         <ul class="header-top__list">
           <li class="header-top__list-item">
             <span class="list-item--text">
@@ -97,13 +167,19 @@
             </span>
             <ul class="sub-list">
               <li class="sub-list-item">
-                Settings
+                <span class="sub-list-item__text">
+                  Settings
+                </span>
               </li>
               <li class="sub-list-item">
-                Widget
+                <span class="sub-list-item__text">
+                  Widget
+                </span>
               </li>
               <li class="sub-list-item">
-                Exit
+                <span class="sub-list-item__text">
+                  Exit
+                </span>
               </li>
             </ul>
           </li>
@@ -113,10 +189,14 @@
             </span>
             <ul class="sub-list">
               <li class="sub-list-item">
-                Blocklist
+                <span class="sub-list-item__text">
+                  Blocklist
+                </span>
               </li>
               <li class="sub-list-item">
-                Clear Queue
+                <span class="sub-list-item__text">
+                  Clear Queue
+                </span>
               </li>
             </ul>
           </li>
