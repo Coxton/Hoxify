@@ -198,7 +198,7 @@ body{
   padding: 10px 20px;
   cursor: pointer;
   width: 100%;
-  max-width: 90px;
+  max-width: 100px;
   text-align: center;
   font-weight: 700;
   letter-spacing: 2px;
@@ -255,8 +255,15 @@ body{
 
 .content-list{
   flex: 1;
+}
+
+.content-settings{
   max-width: 200px;
   border-right: 1px solid #f5f5f5;
+}
+
+.content-detail{
+  flex: 1;
 }
 
 .settings-list{
@@ -401,3 +408,56 @@ body{
 .sub-list-item__text:hover{
   color: #b22849;
 }
+
+
+/*-----------------------------------------------------------------------------*/
+/*                                   Queue Window                              */
+/*-----------------------------------------------------------------------------*/
+
+.queue-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+
+.queue__list-item.header{
+  border-bottom: 1px solid #FFFAFA;
+}
+
+.header:not(:last-child){
+  border-right: 1px solid #FFFAFA;
+}
+
+.list-item__text{
+  width: 100%;
+  font-size: 12px;
+  display: inline-block;
+  line-height: 1.5;
+  padding: 5px;
+  letter-spacing: 1px;
+}
+
+.header .list-item__text{
+  letter-spacing: 2px;
+  line-height: 1.5;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.queue__list-item{
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+  flex-basis: 165px;
+  white-space: nowrap;
+  padding: 0 20px;
+  
+}
+
+
+
