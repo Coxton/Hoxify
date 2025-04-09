@@ -1,5 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
-const path = require('node:path');
+const { shell }                       = require('electron');
+const path                            = require('node:path');
+const spotify                         = require('services/spotify');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -14,6 +16,8 @@ const createWindow = () => {
     'minHeight': 650,
     'minWidth' : 1200,
     webPreferences: {
+      contextIsolation: true,
+      nodeIntegration: false,
       preload: path.join(__dirname, 'preload.js'),
     },
     autoHideMenuBar: true,
@@ -47,6 +51,15 @@ app.on('window-all-closed', () => {
     app.quit();
   }
 });
+
+ipcMain.on('set-spotify-credentials', (event, credentials) => {
+  const {clientId, clientSecret} = credentials;
+
+  //console.log('Received Credentials:', clientId, clientSecret);
+
+
+  
+})
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.

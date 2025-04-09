@@ -197,8 +197,24 @@ body{
   display: none;
 }
 
-.tab-item.visible{
-  display: inline-block;
+.visible{
+  display: block;
+}
+
+.content-detail{
+  display: none;
+}
+
+.content-list{
+  display: none;
+}
+
+.content-detail.visible{
+  display: block;
+}
+
+.content-list.visible{
+  display: block;
 }
 
 .close-tab{
@@ -268,6 +284,14 @@ body{
 
 .settings-list-item{
   margin-top: 10px;
+}
+
+.setting-list{
+  display: none;
+}
+
+.setting-detail{
+  display: none;
 }
 
 .settings-list-item__text{
@@ -452,6 +476,17 @@ body{
   white-space: nowrap;
   padding: 0 20px;
   
+}
+
+/*-----------------------------------------------------------------------------*/
+/*                                   Account Window                            */
+/*-----------------------------------------------------------------------------*/
+
+
+.content-inner{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 

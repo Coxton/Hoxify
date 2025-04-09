@@ -111,9 +111,9 @@
               </div>
               
             </div>
-            <div class="content-section" data-content="queue">
-              <div class="content-list">
-                
+            <div class="content-section" >
+
+              <div class="content-list visible" data-content="queue">
                   <div class="queue-wrapper">
                         <ul class="queue__list-head queue-row">
                           <li class="queue__list-item header">
@@ -162,10 +162,83 @@
                         </ul>
                         
                   </div>
+              </div>
+
+              <div class="content-list" data-content="settings">
+                <ul class="settings-list">
+                  <li class="settings-list-item">
+                    <span class="settings-list-item__text">
+                      System
+                    </span>
+                  </li>
+                  <li class="settings-list-item">
+                    <span class="settings-list-item__text">
+                      Output
+                    </span>
+                  </li>
+                  <li class="settings-list-item">
+                    <span class="settings-list-item__text">
+                      Twitch
+                    </span>
+                    <ul class="list-item__sub-menu">
+                      <li class="sub-menu__list-item">
+                        <span class="sub-list__text">
+                            Rewards
+                        </span>
+                      </li>
+                      <li class="sub-menu__list-item">
+                        <span class="sub-list__text">
+                            SongRequest
+                        </span>
+                      </li>
+                      <li class="sub-menu__list-item">
+                        <span class="sub-list__text">
+                            Responses
+                        </span>
+                      </li>
+                      <li class="sub-menu__list-item">
+                        <span class="sub-list__text">
+                            Commands
+                        </span>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div class="content-detail" data-content="settings">
 
               </div>
+
+              <div class="content-list" data-content="account">
+                <div class="content-inner">
+                  <h3 class="content-header">
+                    Spotify
+                  </h3>
+                  <label for="clientID">Client ID</label>
+                  <input class="account-input" id="clientId" name="clientID" placeholder="Enter your Client ID">
+
+                  <label for="clientSecret">Client Secret</label>
+                  <input class="account-input" id="clientSecret" name="clientSecret" placeholder="Enter your Client Secret">
+
+                  <button class="account-link" id="connectSpotify" type="submit">
+                    Link
+                  </button>
+                </div>
+                
+              </div>
+              <div class="content-detail" data-content="account">
+                account detail
+              </div>
+
+              <div class="content-list" data-content="widget">
+                Widget List
+              </div>
+              <div class="content-detail" data-content="widget">
+                Widget Detail
+              </div>
             </div>
-        </div>
+            
+          </div>
 
       </div>
       <div class="offbrand-sidenav" id="sidenav">

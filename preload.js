@@ -2,3 +2,10 @@
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
 
 
+const {contextBridge, ipcRenderer} = require('electron');
+
+contextBridge.exposeInMainWorld('api', {
+
+    setSpotifyCredentials: (credentials) => ipcRenderer.send('set-spotify-credentials', credentials)
+
+  });

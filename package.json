@@ -21,6 +21,7 @@
     "axios": "^1.8.4",
     "dotenv": "^16.4.7",
     "electron-squirrel-startup": "^1.0.1",
+    "express": "^5.1.0",
     "querystring": "^0.2.1"
   },
   "devDependencies": {
