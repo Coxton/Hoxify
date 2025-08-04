@@ -1,7 +1,7 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
-const { shell }                       = require('electron');
-const path                            = require('node:path');
-const spotify                         = require('services/spotify');
+const { app, BrowserWindow, ipcMain, shell }  = require('electron');
+const { setSpotifyCredentials, startServer }  = require('./services/spotify-auth-server');
+const path                                    = require('node:path');
+const spotify                                 = require('./services/spotify');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -59,6 +59,22 @@ ipcMain.on('set-spotify-credentials', (event, credentials) => {
 
 
   
+})
+
+ipcMain.handle('setSpotifyCredentials', async(event, {clientId, clientSecret}) =>{
+  spotify.storeCredentials(clientId, clientSecret);
+
+  
+
+  setSpotifyCredentials(clientId, clientSecret);
+
+  startServer();
+
+
+  const authUrl = spotify.getAuthorizationUrl();
+  shell.openExternal(authUrl);
+
+  return true;
 })
 
 // In this file you can include the rest of your app's specific main process

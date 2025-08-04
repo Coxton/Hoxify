@@ -147,7 +147,7 @@ function spotifyConnect(){
             return;
         }
 
-        console.log(clientId, clientSecret);
+        //console.log(clientId, clientSecret);
 
         window.api.setSpotifyCredentials({ clientId, clientSecret });
     })

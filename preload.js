@@ -6,6 +6,6 @@ const {contextBridge, ipcRenderer} = require('electron');
 
 contextBridge.exposeInMainWorld('api', {
 
-    setSpotifyCredentials: (credentials) => ipcRenderer.send('set-spotify-credentials', credentials)
+    setSpotifyCredentials: (credentials) => ipcRenderer.invoke('setSpotifyCredentials', credentials)
 
   });

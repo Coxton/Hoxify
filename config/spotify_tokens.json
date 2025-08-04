@@ -1,0 +1,38 @@
+{
+  "access_token": "BQDq9YWLKt9Hw4w5gz_hmqIrJeigCdkhSudMJYi28mF8DXSQ6de99XiAW_YuDcQntWym_LdcfH9-zNWnpyHF43NOSXTdos8NNsHYQY-fhM2wWSrwWiAso3YJaVeeoEm3_LD39TR-tsVldsCmIMCCR95gpViiL7r0EH-2Bx_cV7kiyaEXEbwgYs3gQTPH6oSSRSGMDd1u-uFuK2scS-To7BYGLJLsRV-MvaNzq3hesJMI_eav_kmFB0TzCqu2EwxkgusJzC5eQpi2ynCba7kr9QfjNRIg5o57UFYU7IA3urqM7uQ9P6u-la4",
+  "refresh_token": "AQArremxhfCw610Rz-C0qWbaTagYTGL9FI-kRLrDPgvIA0GGENtQhCJkAIIzdONFlDzzfEsE2Dl1WtryKjaeFmo-RV5Yb56m5sbPNmKzeFs53nlRo_zcqydyP1WqXF47U4I",
+  "expires_in": 3600,
+  "timestamp": 1754335932002,
+  "user": {
+    "country": "DE",
+    "display_name": "Hoxton",
+    "explicit_content": {
+      "filter_enabled": false,
+      "filter_locked": false
+    },
+    "external_urls": {
+      "spotify": "https://open.spotify.com/user/andruscha1122"
+    },
+    "followers": {
+      "href": null,
+      "total": 16
+    },
+    "href": "https://api.spotify.com/v1/users/andruscha1122",
+    "id": "andruscha1122",
+    "images": [
+      {
+        "height": 300,
+        "url": "https://i.scdn.co/image/ab6775700000ee8571d3e32cca2db4816fecc1a8",
+        "width": 300
+      },
+      {
+        "height": 64,
+        "url": "https://i.scdn.co/image/ab67757000003b8271d3e32cca2db4816fecc1a8",
+        "width": 64
+      }
+    ],
+    "product": "premium",
+    "type": "user",
+    "uri": "spotify:user:andruscha1122"
+  }
+}
