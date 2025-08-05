@@ -9,13 +9,13 @@ let storedClientSecret = '';
 
 const tokenPath = path.join(__dirname, '../config/spotify_tokens.json');
 
-// 🔐 Called from main process to set credentials
+//Called from main process to set credentials
 function setSpotifyCredentials(clientId, clientSecret) {
   storedClientId = clientId;
   storedClientSecret = clientSecret;
 }
 
-// 🚪 Launch the local callback server
+//Launch the local callback server
 function startServer() {
   const port = 8888;
 
@@ -27,7 +27,7 @@ function startServer() {
     }
 
     try {
-      // 🔄 Exchange code for tokens
+      //Exchange code for tokens
       const tokenRes = await axios.post('https://accounts.spotify.com/api/token', null, {
         params: {
           grant_type: 'authorization_code',
@@ -48,7 +48,7 @@ function startServer() {
       console.log('[Spotify] Refresh Token:', refresh_token);
       console.log('[Spotify] Expires In:', expires_in + ' seconds');
 
-      // 👤 Fetch Spotify profile
+      //Fetch Spotify profile
       const userRes = await axios.get('https://api.spotify.com/v1/me', {
         headers: {
           Authorization: `Bearer ${access_token}`
@@ -65,7 +65,7 @@ function startServer() {
       console.log('Product:       ', user.product);
       console.log('Profile URL:   ', user.external_urls.spotify);
 
-      // 💾 Save tokens + user data to file
+      //Save tokens + user data to file
       const saveData = {
         access_token,
         refresh_token,
@@ -90,7 +90,7 @@ function startServer() {
   });
 }
 
-// 🔁 Refresh access token using refresh_token
+//Refresh access token using refresh_token
 async function refreshAccessToken() {
   try {
     const file = fs.readFileSync(tokenPath, 'utf-8');
@@ -116,7 +116,7 @@ async function refreshAccessToken() {
 
     const { access_token, expires_in } = res.data;
 
-    // Update and save new access token
+    //Update and save new access token
     data.access_token = access_token;
     data.expires_in = expires_in;
     data.timestamp = Date.now();

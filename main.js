@@ -1,7 +1,9 @@
 const { app, BrowserWindow, ipcMain, shell }  = require('electron');
 const { setSpotifyCredentials, startServer }  = require('./services/spotify-auth-server');
 const path                                    = require('node:path');
+const fs                                      = require('fs');
 const spotify                                 = require('./services/spotify');
+const tokenPath                               = path.join(__dirname, './config/spotify_tokens.json');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -52,14 +54,40 @@ app.on('window-all-closed', () => {
   }
 });
 
-ipcMain.on('set-spotify-credentials', (event, credentials) => {
-  const {clientId, clientSecret} = credentials;
+function isSpotifyConnected(){
+  try {
 
-  //console.log('Received Credentials:', clientId, clientSecret);
+    const data = fs.readFileSync(tokenPath, 'utf-8');
+    const parsed = JSON.parse(data);
+    return !!parsed.access_token;
+
+  } catch(err) {
+
+    return false;
+
+  }
+}
+
+function unlinkSpotify(){
+  try {
+    if (fs.existsSync(tokenPath)) {
+      fs.unlinkSync(tokenPath);
+      console.log('Unlinked Spotify');
+    }
+  } catch (err) {
+    console.error('Failed to unlink', err.message);
+  }
+}
 
 
-  
-})
+ipcMain.handle('spotify:isConnected', () => {
+  return isSpotifyConnected();
+});
+
+ipcMain.handle('spotify:unlink', () => {
+  unlinkSpotify();
+  return true;
+});
 
 ipcMain.handle('setSpotifyCredentials', async(event, {clientId, clientSecret}) =>{
   spotify.storeCredentials(clientId, clientSecret);

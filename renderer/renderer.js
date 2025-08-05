@@ -135,23 +135,38 @@ function closeTabItem(){
 
 
 
-function spotifyConnect(){
+function spotifyConnect() {
+  connectButton.addEventListener('click', async () => {
+    const isConnected = await window.api.isConnected();
 
-    connectButton.addEventListener('click', () => {
+    if (isConnected) {
+      await window.api.unlink();
+      connectButton.textContent = 'Link';
+      console.log('[Spotify] 🔌 Unlinked successfully.');
+      return;
+    }
 
-        const clientId      = clientIdInput.value.trim();
-        const clientSecret  = clientSecretInput.value.trim();
+    const clientId = clientIdInput.value.trim();
+    const clientSecret = clientSecretInput.value.trim();
 
-        if(!clientId || !clientSecret){
-            console.log('missing values');
-            return;
-        }
+    if (!clientId || !clientSecret) {
+      console.log('[Spotify] Missing credentials.');
+      return;
+    }
 
-        //console.log(clientId, clientSecret);
+    await window.api.setSpotifyCredentials({ clientId, clientSecret });
 
-        window.api.setSpotifyCredentials({ clientId, clientSecret });
-    })
+    // Update button to Unlink
+    connectButton.textContent = 'Unlink';
+    console.log('[Spotify] 🔗 Linked successfully.');
+  });
+}
 
+async function initializeUI() {
+  setupEventListeners();
+
+  const isConnected = await window.spotifyAPI.isConnected();
+  connectButton.textContent = isConnected ? 'Unlink' : 'Link';
 }
 
 

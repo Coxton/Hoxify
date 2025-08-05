@@ -10,7 +10,7 @@ function storeCredentials(id, secret){
     clientId        = id;
     clientSecret    = secret;
 
-    //console.log("ID:" +  clientId + "Secret:" + clientSecret);
+    console.log("ID:" +  clientId + "Secret:" + clientSecret);
 
 }
 
@@ -51,16 +51,16 @@ function getAuthorizationUrl() {
 
     const track = res.data.item;
 
-    console.log('\n[Spotify] 🎵 Currently Playing:');
+/*     console.log('\n[Spotify] 🎵 Currently Playing:');
     console.log('Track:   ', track.name);
     console.log('Artists: ', track.artists.map(a => a.name).join(', '));
     console.log('Album:   ', track.album.name);
     console.log('Progress:', `${Math.floor(res.data.progress_ms / 1000)}s / ${Math.floor(track.duration_ms / 1000)}s`);
     console.log('Playing: ', res.data.is_playing ? '▶️ Playing' : '⏸️ Paused');
-    console.log('Device:  ', res.data.device.name);
+    console.log('Device:  ', res.data.device.name); */
 
   } catch (err) {
-    console.error('[Spotify] ❌ Error while fetching current track:', err.response?.data || err.message);
+    //console.error('[Spotify] ❌ Error while fetching current track:', err.response?.data || err.message);
   }
 }
 
