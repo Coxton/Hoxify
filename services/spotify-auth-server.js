@@ -1,3 +1,6 @@
+
+//Start Express Server and fetch Spotify Answer
+
 const express = require('express');
 const axios = require('axios');
 const fs = require('fs');
@@ -43,10 +46,6 @@ function startServer() {
 
       const { access_token, refresh_token, expires_in } = tokenRes.data;
 
-      console.log('\n[Spotify] ✅ Token Exchange Successful');
-      console.log('[Spotify] Access Token:', access_token);
-      console.log('[Spotify] Refresh Token:', refresh_token);
-      console.log('[Spotify] Expires In:', expires_in + ' seconds');
 
       //Fetch Spotify profile
       const userRes = await axios.get('https://api.spotify.com/v1/me', {
@@ -57,21 +56,16 @@ function startServer() {
 
       const user = userRes.data;
 
-      console.log('\n[Spotify] 🎧 Logged in as:');
-      console.log('ID:            ', user.id);
-      console.log('Display Name:  ', user.display_name);
-      console.log('Email:         ', user.email);
-      console.log('Country:       ', user.country);
-      console.log('Product:       ', user.product);
-      console.log('Profile URL:   ', user.external_urls.spotify);
-
       //Save tokens + user data to file
       const saveData = {
         access_token,
         refresh_token,
+        client_id: storedClientId,
+        client_secret: storedClientSecret,
         expires_in,
         timestamp: Date.now(),
-        user
+        user,
+
       };
 
       fs.writeFileSync(tokenPath, JSON.stringify(saveData, null, 2), 'utf-8');
@@ -86,9 +80,36 @@ function startServer() {
   });
 
   app.listen(port, () => {
-    console.log(`[Spotify] 🚪 Listening on http://localhost:${port}/callback`);
+    //console.log(`[Spotify] 🚪 Listening on http://localhost:${port}/callback`);
   });
 }
+
+async function validateAccessToken() {
+  try {
+    const tokenFile = fs.readFileSync(tokenPath, 'utf-8');
+    const data = JSON.parse(tokenFile);
+
+    const res = await axios.get('https://api.spotify.com/v1/me', {
+      headers: {
+        Authorization: `Bearer ${data.access_token}`
+      }
+    });
+
+    console.log('[Spotify] ✅ Access token is still valid.');
+    return true;
+
+  } catch (err) {
+    if (err.response?.status === 401) {
+      console.warn('[Spotify] ⚠️ Access token expired, attempting refresh...');
+      const refreshed = await refreshAccessToken();
+      return !!refreshed;
+    }
+
+    console.error('[Spotify] ❌ Token validation error:', err.response?.data || err.message);
+    return false;
+  }
+}
+
 
 //Refresh access token using refresh_token
 async function refreshAccessToken() {
@@ -135,5 +156,6 @@ async function refreshAccessToken() {
 module.exports = {
   setSpotifyCredentials,
   startServer,
-  refreshAccessToken
+  refreshAccessToken,
+  validateAccessToken
 };

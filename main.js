@@ -1,9 +1,12 @@
-const { app, BrowserWindow, ipcMain, shell }  = require('electron');
-const { setSpotifyCredentials, startServer }  = require('./services/spotify-auth-server');
-const path                                    = require('node:path');
-const fs                                      = require('fs');
-const spotify                                 = require('./services/spotify');
-const tokenPath                               = path.join(__dirname, './config/spotify_tokens.json');
+const { app, BrowserWindow, ipcMain, shell }      = require('electron');
+const { 
+  setSpotifyCredentials, 
+  startServer, 
+  validateAccessToken }                           = require('./services/spotify-auth-server');
+const path                                        = require('node:path');
+const fs                                          = require('fs');
+const spotify                                     = require('./services/spotify');
+const tokenPath                                   = path.join(__dirname, './config/spotify_tokens.json');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -37,6 +40,7 @@ const createWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   createWindow();
+  autoConnectToSpotify();
 
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
@@ -57,9 +61,20 @@ app.on('window-all-closed', () => {
 function isSpotifyConnected(){
   try {
 
-    const data = fs.readFileSync(tokenPath, 'utf-8');
-    const parsed = JSON.parse(data);
-    return !!parsed.access_token;
+    if(!fs.existsSync(tokenPath)) return false;
+
+    const file = fs.readFileSync(tokenPath, 'utf-8');
+    const data = JSON.parse(file);
+
+    const {access_token, refresh_token, client_id, client_secret} = data;
+
+    if (access_token && refresh_token && client_id && client_secret) {
+      spotify.storeCredentials(client_id, client_secret);
+      setSpotifyCredentials(client_id, client_secret);
+      return true;
+    }
+
+    return false;
 
   } catch(err) {
 
@@ -79,6 +94,44 @@ function unlinkSpotify(){
   }
 }
 
+function autoConnectToSpotify() {
+  const tokenFilePath = path.join(__dirname, './config/spotify_tokens.json');
+
+  if (!fs.existsSync(tokenFilePath)) {
+    console.log('[Spotify] ⛔ No existing Spotify token found.');
+    return;
+  }
+
+  try {
+    const tokenData = JSON.parse(fs.readFileSync(tokenFilePath, 'utf-8'));
+    const { user, refresh_token } = tokenData;
+
+    if (!user || !refresh_token) {
+      console.log('[Spotify] ⚠️ Token file is incomplete. Skipping auto-connect.');
+      return;
+    }
+
+    // Restore clientId/secret if you want to use them during refresh
+    const clientId = process.env.SPOTIFY_CLIENT_ID || 'fallback_id';
+    const clientSecret = process.env.SPOTIFY_CLIENT_SECRET || 'fallback_secret';
+
+    setSpotifyCredentials(clientId, clientSecret);
+    startServer();
+
+    validateAccessToken().then(valid => {
+      if (valid) {
+        console.log(`[Spotify] 🔗 Reconnected as ${user.display_name}`);
+        // Optionally: Send IPC to renderer to auto-mark as connected
+      } else {
+        console.log('[Spotify] ❌ Failed to reconnect.');
+      }
+    });
+
+  } catch (err) {
+    console.error('[Spotify] 🧨 Error reading token file:', err.message);
+  }
+}
+
 
 ipcMain.handle('spotify:isConnected', () => {
   return isSpotifyConnected();
@@ -88,6 +141,11 @@ ipcMain.handle('spotify:unlink', () => {
   unlinkSpotify();
   return true;
 });
+
+ipcMain.handle('spotify:getCurrentTrack', async () => {
+  return await spotify.getCurrentPlayback();
+});
+
 
 ipcMain.handle('setSpotifyCredentials', async(event, {clientId, clientSecret}) =>{
   spotify.storeCredentials(clientId, clientSecret);

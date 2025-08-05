@@ -30,7 +30,7 @@ body{
 .main-section
 {
   display: flex;
-  gap: 10px;
+  gap: 30px;
   padding: 0 0 50px 50px;
   flex-direction: row;
   overflow: hidden;
@@ -172,7 +172,7 @@ body{
   gap: 0;
   flex-direction: column;
   margin: 15px;
-  height: 465px;
+  height: 435px;
 }
 
 .tabs-section {

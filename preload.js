@@ -6,8 +6,9 @@ const {contextBridge, ipcRenderer} = require('electron');
 
 contextBridge.exposeInMainWorld('api', {
 
-    setSpotifyCredentials: (credentials) => ipcRenderer.invoke('setSpotifyCredentials', credentials),
-    isConnected: () => ipcRenderer.invoke('spotify:isConnected'),
-    unlink: () => ipcRenderer.invoke('spotify:unlink'),
-    //getCurrentTrack: () => ipcRenderer.invoke('spotify:getCurrentTrack'),
+    setSpotifyCredentials:              (credentials) => ipcRenderer.invoke('setSpotifyCredentials', credentials),
+    isConnected:                        () => ipcRenderer.invoke('spotify:isConnected'),
+    unlink:                             () => ipcRenderer.invoke('spotify:unlink'),
+    getCurrentTrack:                    () => ipcRenderer.invoke('spotify:getCurrentTrack'),
+    
   });

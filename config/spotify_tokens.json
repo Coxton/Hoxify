@@ -1,8 +1,10 @@
 {
-  "access_token": "BQArf6DKJDURuOi9aF_m_tiBWzJOOAgvdoSvBtAdsOKIUAPbjSmGi8aXUtY438-rv5pyFv5JNjIyw5JO2jwyrq_-Sm6MDKXBPP02_BhGmsKqb6wUsCdz7ORm6rh1eAUJi1nvSliQ56cW7S5-XOOoqzhsQVgpZdtvzmrdnyDQb3zF6gNCKdK3R4MTIYcxbdJvsp-gLyXKLlXHCDAL_xfsuJPBKOnI2vS0DP9HQlyDmwoTxAj2RQ-jpnGETtLozO2FaYyg4xryx5oIrD7_J8Kfdh2-ImcgLpr4hri6qdBOS7UpGSJu2nG4Z5k",
-  "refresh_token": "AQCExqmgOM7ea8w-YHA9bfQL9jNDSB9VjrzDXPK5jmH4_CjKVHpx79nHVLC0rntKzz71Q8SRHLbD_97YidScGFXeU22HqFrOLHsOty43hQBP4Bd60A52CkzB-ssKDkxzzHA",
+  "access_token": "BQBcVw0zBTcAcpJpZO77eG_Cjr2ZgztxLIWEfLwqKhsBLgXjCsmg7WauizmM7k-7eUNvNZkLq0M-jQnZGnyi3u7bqdBxSZMrO-5wqwaGoZYGiepWTXUzX-JpQMoS8GW0VVqvdjC6wVy2T2o9Q5DP1KsIWfFHihiI_IxcUyi4Ru2106yEvLS0kfgy44Gzuwu1ekU0iBYn-ZiXC_rakYV4Xbj_hdrwzzCa2kizj4Zu-ejYSeeUF2bNpmeUPovrOPDTmAymA03cZsW4AoxCHfkH8aNhZcSLTaHg3KUKwMVyl_7xm1C17VyjEwk",
+  "refresh_token": "AQCChi0ueZdkvJb73d-SLIfqxnIR0-CC_8aZ7WaipIFWvNrOsnTRi9d0c1Z40NsSDxc6M0LB_2Dg3dW6ftNvvEQPVXkCszlDb-2gbapNro4xjzuCla2glcDMiWT6sb0OPQw",
+  "client_id": "2d2940559966422c8ed2a57b8e6533fc",
+  "client_secret": "40a7ffa0283e43f5aaff4d9c94353a3d",
   "expires_in": 3600,
-  "timestamp": 1754381630304,
+  "timestamp": 1754395266384,
   "user": {
     "country": "DE",
     "display_name": "Hoxton",

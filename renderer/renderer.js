@@ -14,13 +14,21 @@ const contentDetail         = document.querySelectorAll(".content-detail");
 const clientIdInput         = document.getElementById('clientId');
 const clientSecretInput     = document.getElementById('clientSecret');
 const connectButton         = document.getElementById('connectSpotify');
+let currentTrack            = null;
+let progressTimer           = null;
 
 
 
 
 
-function initializeUI(){
+async function initializeUI(){
     setupEventListeners();
+
+    const isConnected = await window.api.isConnected();
+    connectButton.textContent = isConnected ? 'Unlink' : 'Link';
+
+    fetchTrackFromSpotify();
+    setInterval(fetchTrackFromSpotify, 10000);
 }
 
 
@@ -65,28 +73,17 @@ function createTabContent(){
             tabContentList.classList.add('visible');
             tabContentDetail.classList.add('visible');
 
-            
-
-            
-
-            //lazyloadFragment(dataTrigger);
-            
+                        
         })
 
     })
 }
 
-function lazyloadFragment(filename){
-    const target = document.querySelector('.content-section');
-    
-    
-
-    
-}
-
 function tabItemSelector(){
     tabItem.forEach((tab) =>{
+
         tab.addEventListener('click', function(e){
+
             var target                      = e.currentTarget;
             var dataTab                     = target.dataset.tab;
             var tabContentList              = document.querySelector(`.content-list[data-content="${dataTab}"]`);
@@ -102,7 +99,7 @@ function tabItemSelector(){
             }
             target.classList.add('selected');
 
-            console.log(tabContentList)
+            //console.log(tabContentList)
 
             tabContentList.classList.add('visible');
             if(tabContentDetail && contentDetail.dataset !== dataTab && contentList.dataset !== dataTab){
@@ -115,8 +112,11 @@ function tabItemSelector(){
 }
 
 function closeTabItem(){
+
     closeTab.forEach((close) =>{
+
         close.addEventListener('click', function(e){
+
             var target = e.currentTarget;
 
             target.parentElement.classList.remove('selected', 'visible');
@@ -136,13 +136,14 @@ function closeTabItem(){
 
 
 function spotifyConnect() {
+
   connectButton.addEventListener('click', async () => {
     const isConnected = await window.api.isConnected();
 
     if (isConnected) {
       await window.api.unlink();
       connectButton.textContent = 'Link';
-      console.log('[Spotify] 🔌 Unlinked successfully.');
+      //console.log('[Spotify] 🔌 Unlinked successfully.');
       return;
     }
 
@@ -150,7 +151,7 @@ function spotifyConnect() {
     const clientSecret = clientSecretInput.value.trim();
 
     if (!clientId || !clientSecret) {
-      console.log('[Spotify] Missing credentials.');
+      //console.log('[Spotify] Missing credentials.');
       return;
     }
 
@@ -158,16 +159,86 @@ function spotifyConnect() {
 
     // Update button to Unlink
     connectButton.textContent = 'Unlink';
-    console.log('[Spotify] 🔗 Linked successfully.');
+    //console.log('[Spotify] 🔗 Linked successfully.');
   });
 }
 
-async function initializeUI() {
-  setupEventListeners();
 
-  const isConnected = await window.spotifyAPI.isConnected();
-  connectButton.textContent = isConnected ? 'Unlink' : 'Link';
+
+
+async function fetchTrackFromSpotify() {
+  const data = await window.api.getCurrentTrack();
+
+  if (!data) {
+    clearInterval(progressTimer);
+    currentTrack = null;
+    updateNowPlayingUI(null);
+    return;
+  }
+
+  currentTrack = {
+    ...data,
+    fetched_at: Date.now()
+  };
+
+  updateNowPlayingUI(currentTrack);
 }
+
+function updateNowPlayingUI(track) {
+
+    console.log(track);
+    
+  const titleSpan = document.querySelector('.player-title__name');
+  const artistSpan = document.querySelector('.player-title__artist');
+  const thumbnailImg = document.querySelector('.thumbnail');
+  const progressBar = document.querySelector('.progress-bar');
+
+  if (!track) {
+    titleSpan.textContent = 'Nothing Playing';
+    artistSpan.textContent = '';
+    thumbnailImg.src = 'assets/img/thumbnail_placeholder.jpg';
+    progressBar.innerHTML = 'No Progress';
+    return;
+  }
+
+  titleSpan.textContent = track.name;
+  artistSpan.textContent = track.artists;
+  if (track.thumbnail) thumbnailImg.src = track.thumbnail;
+
+  clearInterval(progressTimer);
+
+  progressTimer = setInterval(() => {
+    const now = Date.now();
+    const elapsed = now - track.fetched_at;
+    let simulatedProgress = track.progress_ms + elapsed;
+
+    if (simulatedProgress > track.duration_ms) {
+      simulatedProgress = track.duration_ms;
+      clearInterval(progressTimer); // stop ticking at end of song
+    }
+
+    const currentSec = Math.floor(simulatedProgress / 1000);
+    const totalSec = Math.floor(track.duration_ms / 1000);
+    const percent = (simulatedProgress / track.duration_ms) * 100;
+
+    progressBar.innerHTML = `
+      <div style="width: 100%; height: 5px; background: #333;">
+        <div style="width: ${percent}%; height: 100%; background: #8C6EF2;"></div>
+      </div>
+      <span style="font-size: 12px; color: #ccc;">
+        ${formatTime(currentSec)} / ${formatTime(totalSec)}
+      </span>
+    `;
+  }, 1000);
+}
+
+
+function formatTime(seconds) {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+}
+
 
 
 window.addEventListener('DOMContentLoaded', initializeUI);

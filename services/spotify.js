@@ -1,3 +1,6 @@
+
+//Initialize Spotify OAuth Flow: Fetching ClientId and ClientSecret
+
 const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
@@ -10,7 +13,7 @@ function storeCredentials(id, secret){
     clientId        = id;
     clientSecret    = secret;
 
-    console.log("ID:" +  clientId + "Secret:" + clientSecret);
+    //console.log("ID:" +  clientId + "Secret:" + clientSecret);
 
 }
 
@@ -33,9 +36,10 @@ function getAuthorizationUrl() {
   //fetch current Song
   //TODO: UPDATE GUI AND CALL IT IN INTERVALLS
 
-  async function logCurrentPlayback() {
+  async function getCurrentPlayback() {
   try {
-    const file = fs.readFileSync(path.join(__dirname, '../config/spotify_tokens.json'), 'utf-8');
+    const tokenPath = path.join(__dirname, '../config/spotify_tokens.json');
+    const file = fs.readFileSync(tokenPath, 'utf-8');
     const { access_token } = JSON.parse(file);
 
     const res = await axios.get('https://api.spotify.com/v1/me/player/currently-playing', {
@@ -44,31 +48,32 @@ function getAuthorizationUrl() {
       }
     });
 
-    if (res.status === 204 || !res.data?.item) {
-      console.log('[Spotify] 🔇 Nothing is currently playing.');
-      return;
-    }
+    if (res.status === 204 || !res.data?.item) return null;
 
-    const track = res.data.item;
+    const data = res.data;
+    const track = data.item;
 
-/*     console.log('\n[Spotify] 🎵 Currently Playing:');
-    console.log('Track:   ', track.name);
-    console.log('Artists: ', track.artists.map(a => a.name).join(', '));
-    console.log('Album:   ', track.album.name);
-    console.log('Progress:', `${Math.floor(res.data.progress_ms / 1000)}s / ${Math.floor(track.duration_ms / 1000)}s`);
-    console.log('Playing: ', res.data.is_playing ? '▶️ Playing' : '⏸️ Paused');
-    console.log('Device:  ', res.data.device.name); */
+    return {
+      name: track.name,
+      artists: track.artists.map(a => a.name).join(', '),
+      album: track.album.name,
+      thumbnail: track.album.images[0]?.url || null,
+      progress_ms: data.progress_ms,
+      duration_ms: track.duration_ms,
+      is_playing: data.is_playing,
+    };
 
   } catch (err) {
-    //console.error('[Spotify] ❌ Error while fetching current track:', err.response?.data || err.message);
+    console.error('[Spotify] ❌ getCurrentPlayback error:', err.response?.data || err.message);
+    return null;
   }
 }
 
-logCurrentPlayback();
 
   
   module.exports = {
     storeCredentials,
     getAuthorizationUrl,
+    getCurrentPlayback,
   };
 
